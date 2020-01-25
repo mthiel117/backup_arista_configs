@@ -1,0 +1,21 @@
+---
+
+- name: Backup configs
+  connection: network_cli
+  gather_facts: yes
+  hosts: switches
+  
+  tasks:
+
+   #- name: Display Hosts 
+   #  debug:
+   #    msg: System {{ ansible_host }}
+
+   - name: Backup config
+     eos_config:
+       backup: yes
+       backup_options:
+         filename: "{{ansible_host}}.cfg"
+         dir_path: /Users/mthiel/Desktop/lab_backups
+
+     
