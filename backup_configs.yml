@@ -9,13 +9,13 @@
 
    #- name: Display Hosts 
    #  debug:
-   #    msg: System {{ ansible_host }}
+   #    msg: System {{ inventory_hostname }}
 
    - name: Backup config
      eos_config:
        backup: yes
        backup_options:
-         filename: "{{ ansible_host }}.cfg"
+         filename: "{{ inventory_hostname }}.cfg"
          dir_path: "{{ local_git_repo_path }}"
 
      
