@@ -18,4 +18,25 @@
          filename: "{{ inventory_hostname }}.cfg"
          dir_path: "{{ local_git_repo_path }}"
 
-     
+- name: Commit Configuration Changes to local and remote repos
+  hosts: localhost
+  connection: local
+  tags: git
+
+  tasks:
+
+    - name: commit changes to git
+      shell: |
+          git add .
+          git commit -m "Config snapshot taken $(date +"%Y-%m-%d %H:%M:%S")"
+          # Push changes to GitHub
+          # Remote repo pre-defined in local git
+          # git remote add origin https://github.com/mthiel117/backups.git
+          # git push -u origin master
+          git push
+          # Needed as git commit will fail if there are no changed files
+          exit 0
+      args:
+          # Change to local repo directory to commit changes
+          chdir: "{{ local_git_repo_path }}"
+          
