@@ -1,7 +1,7 @@
 [hosts]
-eos1
-eos2
-eos3
+eos1 ansible_ssh_host=192.168.1.250
+eos2 ansible_ssh_host=192.168.1.251
+eos3 ansible_ssh_host=192.168.1.252
 
 [switches]
 eos1
@@ -13,4 +13,4 @@ ansible_user=admin
 ansible_ssh_pass=admin
 ansible_network_os=eos
 ansible_connection=network_cli
-# ansible_ssh_private_key_file=/Users/mthiel/.ssh/id_rsa
+local_git_repo_path = "/Users/mthiel/Desktop/lab_backups"

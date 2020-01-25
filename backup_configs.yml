@@ -15,7 +15,7 @@
      eos_config:
        backup: yes
        backup_options:
-         filename: "{{ansible_host}}.cfg"
-         dir_path: /Users/mthiel/Desktop/lab_backups
+         filename: "{{ ansible_host }}.cfg"
+         dir_path: "{{ local_git_repo_path }}"
 
      
