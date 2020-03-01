@@ -2,8 +2,8 @@
 
 - name: Backup configs
   connection: network_cli
-  gather_facts: yes
-  hosts: switches
+  gather_facts: no
+  hosts: physical
   
   tasks:
 
@@ -18,14 +18,14 @@
          filename: "{{ inventory_hostname }}.cfg"
          dir_path: "{{ local_git_repo_path }}"
 
-- name: Commit Configuration Changes to local and remote repos
+- name: Commit Configuration Changes
   hosts: localhost
   connection: local
   tags: git
 
   tasks:
 
-    - name: commit changes to git
+    - name: Committing changes to Local repo & pushing to GitHub
       shell: |
           git add .
           git commit -m "Config snapshot taken $(date +"%Y-%m-%d %H:%M:%S")"
@@ -34,7 +34,7 @@
           # git remote add origin https://github.com/mthiel117/backups.git
           # git push -u origin master
           git push
-          # Needed as git commit will fail if there are no changed files
+          # Exit needed as git commit will fail if there are no changed files
           exit 0
       args:
           # Change to local repo directory to commit changes
